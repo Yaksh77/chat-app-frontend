@@ -1,2 +1,2 @@
-const apiURL = "http://localhost:3000";
+const apiURL = "https://chat-backend-nhxe.onrender.com";
 export default apiURL;

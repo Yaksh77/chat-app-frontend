@@ -12,6 +12,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FiLogIn } from "react-icons/fi";
 import { useState } from "react";
 import axios from "axios";
+import apiURL from "../../utils";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -25,13 +26,10 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const { data } = await axios.post(
-        `http://localhost:3000/api/users/login`,
-        {
-          email,
-          password,
-        }
-      );
+      const { data } = await axios.post(`${apiURL}/api/users/login`, {
+        email,
+        password,
+      });
       console.log(data);
       // Save user data to local storage
       localStorage.setItem("userInfo", JSON.stringify(data.user));
