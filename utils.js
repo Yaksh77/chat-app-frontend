@@ -1,2 +1,2 @@
-const apiURL = `${process.env.BECKEND_URL}`;
+const apiURL = process.env.REACT_APP_BACKEND_URL;
 export default apiURL;
