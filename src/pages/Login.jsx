@@ -26,13 +26,10 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const { data } = await axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}/api/users/login`,
-        {
-          email,
-          password,
-        }
-      );
+      const { data } = await axios.post(`${apiURL}/api/users/login`, {
+        email,
+        password,
+      });
       console.log(data);
       // Save user data to local storage
       localStorage.setItem("userInfo", JSON.stringify(data.user));
