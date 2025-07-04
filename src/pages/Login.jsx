@@ -25,28 +25,41 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    console.log("Login started", apiURL);
+
     try {
       const { data } = await axios.post(`${apiURL}/api/users/login`, {
         email,
         password,
       });
-      console.log(data);
-      // Save user data to local storage
-      localStorage.setItem("userInfo", JSON.stringify(data.user));
-      navigate("/chat");
+
+      console.log("Login success:", data);
+
+      if (data && data.user) {
+        localStorage.setItem("userInfo", JSON.stringify(data.user));
+        navigate("/chat");
+      } else {
+        throw new Error("Invalid response: No user object");
+      }
     } catch (error) {
-      console.log(error);
+      console.error("Login error:", error);
 
       toast({
         title: "Error",
-        description: error.response.data.message || "An error occurred",
+        description:
+          error?.response?.data?.message ||
+          error.message ||
+          "An unexpected error occurred",
         status: "error",
         duration: 5000,
         isClosable: true,
       });
+    } finally {
+      console.log("Login finished");
+      setLoading(false);
     }
-    setLoading(false);
   };
+
   return (
     <Box
       w="100%"
