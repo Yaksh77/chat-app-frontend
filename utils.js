@@ -1,2 +1,2 @@
-const apiURL = "https://chat-backend-nhxe.onrender.com";
+const apiURL = `${process.env.BECKEND_URL}`;
 export default apiURL;
